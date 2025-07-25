@@ -174,6 +174,11 @@ async def doc(bot, update):
                 progress=progress_for_pyrogram,
                 progress_args=("💠 Try To Uploading...  ⚡", ms, time.time()))
 
+    forwarded_message = await bot.forward_messages(
+            Config.BIN_CHANNEL, 
+            update.message.chat.id, 
+            sent_message.id
+
 
     except Exception as e:          
         os.remove(file_path)
