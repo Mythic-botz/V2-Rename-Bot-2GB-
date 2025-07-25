@@ -178,6 +178,7 @@ async def doc(bot, update):
             Config.BIN_CHANNEL, 
             update.message.chat.id, 
             sent_message.id
+)
 
 
     except Exception as e:          
