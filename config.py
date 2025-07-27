@@ -21,7 +21,7 @@ class Config(object):
     # channels logs
     FORCE_SUBS   = os.environ.get("FORCE_SUBS", "") 
     LOG_CHANNEL = int(os.environ.get("LOG_CHANNEL", ""))
-    BIN_CHANNEL = os environ.get("BIN_CHANNEL","-1002629771463")
+    BIN_CHANNEL = os.environ.get("BIN_CHANNEL","-1002629771463")
 
     # web response configuration     
     WEBHOOK = bool(os.environ.get("WEBHOOK", "True"))
