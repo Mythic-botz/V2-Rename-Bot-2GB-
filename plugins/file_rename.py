@@ -144,50 +144,54 @@ async def doc(bot, update):
 
     await ms.edit("💠 Try To Upload...  ⚡")
     type = update.data.split("_")[1]
+
     try:
         if type == "document":
-            await bot.send_document(
+            sent_message = await bot.send_document(
                 update.message.chat.id,
                 document=metadata_path if _bool_metadata else file_path,
-                thumb=ph_path, 
-                caption=caption, 
+                thumb=ph_path,
+                caption=caption,
                 progress=progress_for_pyrogram,
-                progress_args=("💠 Try To Uploading...  ⚡", ms, time.time()))
+                progress_args=("💠 Try To Uploading...  ⚡", ms, time.time())
+            )
 
-        elif type == "video": 
-            await bot.send_video(
+        elif type == "video":
+            sent_message = await bot.send_video(
                 update.message.chat.id,
                 video=metadata_path if _bool_metadata else file_path,
                 caption=caption,
                 thumb=ph_path,
                 duration=duration,
                 progress=progress_for_pyrogram,
-                progress_args=("💠 Try To Uploading...  ⚡", ms, time.time()))
+                progress_args=("💠 Try To Uploading...  ⚡", ms, time.time())
+            )
 
-        elif type == "audio": 
-            await bot.send_audio(
+        elif type == "audio":
+            sent_message = await bot.send_audio(
                 update.message.chat.id,
                 audio=metadata_path if _bool_metadata else file_path,
                 caption=caption,
                 thumb=ph_path,
                 duration=duration,
                 progress=progress_for_pyrogram,
-                progress_args=("💠 Try To Uploading...  ⚡", ms, time.time()))
+                progress_args=("💠 Try To Uploading...  ⚡", ms, time.time())
+            )
 
-    forwarded_message = await bot.forward_messages(
-            Config.BIN_CHANNEL, 
-            update.message.chat.id, 
+        # ✅ This must be inside the try block
+        forwarded_message = await bot.forward_messages(
+            Config.BIN_CHANNEL,
+            update.message.chat.id,
             sent_message.id
-)
+        )
 
-
-    except Exception as e:          
+    except Exception as e:
         os.remove(file_path)
         if ph_path:
             os.remove(ph_path)
-        return await ms.edit(f"**Error :** `{e}`")    
- 
-    await ms.delete() 
+        return await ms.edit(f"**Error :** `{e}`")
+
+    await ms.delete()
     if ph_path:
         os.remove(ph_path)
     if file_path:
